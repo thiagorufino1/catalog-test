@@ -4,7 +4,9 @@ description: "Analisa código e gera um catálogo de capacidades."
 on:
   workflow_dispatch:
 
-engine: copilot
+engine:
+  id: copilot
+  model: gpt-5
 
 permissions:
   contents: read
