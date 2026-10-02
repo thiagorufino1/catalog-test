@@ -6,7 +6,7 @@ on:
 
 engine:
   id: copilot
-  model: gpt-5
+  model: gpt-5.4-mini
 
 permissions:
   contents: read
