@@ -49,7 +49,7 @@ Em [catalog.md](.github/workflows/catalog.md):
 ```yaml
 engine:
   id: claude
-  model: claude-haiku-4-5-20251001   # trocar o modelo = editar esta linha
+  model: claude-sonnet-4-5   # trocar o modelo = editar esta linha
 permissions:
   contents: read
 tools:
