@@ -23,7 +23,7 @@ safe-outputs:
 
 # Capabilities Catalog
 
-Analise o código-fonte disponível nos repositórios autorizados.
+Analise o código-fonte do repositório `thiagorufino1/mcp-msteams` (público, branch `main`), lendo-o com as ferramentas do GitHub (não o repositório atual, que serve só para publicar o resultado).
 
 Seu objetivo é identificar as capacidades funcionais oferecidas pelo software,
 baseando-se no código-fonte e não apenas no README ou na documentação existente.
