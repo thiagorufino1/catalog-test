@@ -31,14 +31,17 @@ Catálogo de capacidades funcionais de servidores MCP (Model Context Protocol) p
 
 **Principais Capacidades:**
 - Consulta e busca de dispositivos gerenciados
-- Ações em dispositivos (sync, restart, retire, wipe, delete)
-- Workflow de aprovação para ações destrutivas
-- Operações em lote (bulk actions)
+- Ações em dispositivos (sync, restart, scan, locate; retire, wipe e delete com aprovação)
+- Workflow de aprovação (aprovar, negar, executar) com expiração
+- Operações em lote (sync e restart, até 20 dispositivos)
+- Governança: LAPS, chaves BitLocker (com aprovação) e RBAC
+- Relatórios, auditoria e Endpoint Analytics
+- Scripts de remediação proativa
+- Gestão de atualizações (anéis e perfis de update)
 - Windows Autopilot (listagem, importação)
-- Gerenciamento de updates
-- Scripts PowerShell remotos
-- Relatórios e governança
 - Windows Autopatch
+
+**Ferramentas expostas:** 47
 
 **Tecnologias:** Python 3.12+, FastMCP, Microsoft Graph API
 
@@ -50,7 +53,7 @@ Ambos os repositórios compartilham:
 
 - **Arquitetura:** FastMCP server com tools expostas via MCP
 - **Autenticação:** Azure AD (MSAL) com Client Credentials flow
-- **API:** Microsoft Graph API v1.0
+- **API:** Microsoft Graph API (o `mcp-intune` também usa endpoints beta, com `ALLOW_BETA_APIS=true`)
 - **Cliente HTTP:** httpx com retry automático e throttling
 - **Logging:** structlog com formato JSON
 - **Cache:** TTL-based para operações de leitura
@@ -58,12 +61,6 @@ Ambos os repositórios compartilham:
 
 ## Metodologia de Análise
 
-Este catálogo foi gerado através da análise sistemática do código-fonte de cada repositório:
+Este catálogo foi gerado por um agente de IA que lê o código-fonte dos repositórios (manifesto de dependências, ponto de entrada e arquivos de tools) e depois revisado por uma pessoa. A lista de tools de cada página foi conferida contra os nomes registrados no código: `mcp-msteams` com 27 e `mcp-intune` com 47.
 
-1. Leitura dos manifestos de dependências (`pyproject.toml`)
-2. Análise dos pontos de entrada (`server.py`)
-3. Leitura completa de todos os arquivos de tools
-4. Análise dos services e implementação das capacidades
-5. Verificação de clientes de API e autenticação
-
-**Importante:** As capacidades documentadas foram identificadas através da leitura do código-fonte real, não apenas da documentação README. Quando há divergência entre documentação e código, o código prevalece.
+**Importante:** As capacidades vêm do código-fonte, não do README. Quando há divergência entre documentação e código, o código prevalece. Detalhes de implementação dos serviços e do cliente do Graph podem não estar cobertos; veja a seção "Arquivos analisados" de cada página.
