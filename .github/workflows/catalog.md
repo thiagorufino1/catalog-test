@@ -29,6 +29,22 @@ Leia o arquivo `mcps.json` na raiz do repositório atual. Ele lista, em
 GitHub. Não use o repositório atual como alvo: ele serve só para publicar o
 resultado.
 
+## Método obrigatório (por repositório)
+
+1. Liste a árvore completa de arquivos do repositório.
+2. Leia o manifesto de dependências e a configuração (ex.: `pyproject.toml`,
+   `package.json`, `config.*`, `.env.example`).
+3. Leia o ponto de entrada e o registro de capacidades (ex.: servidor, rotas,
+   registro de tools).
+4. **Leia a implementação de cada capacidade**, não só a sua declaração: abra os
+   arquivos de serviços/lógica de negócio, clientes de API, autenticação e
+   segurança. Entenda o que o código realmente faz (chamadas externas feitas,
+   permissões exigidas, filtros, paginação, cache, erros tratados).
+5. Só use README e `docs/` para comparar, nunca como fonte. Se o README divergir
+   do código, o código vence: registre a divergência na seção "Divergências".
+6. Se você não abriu o arquivo, você não pode afirmar nada sobre ele. Não deduza
+   comportamento pelo nome de uma função.
+
 Seu objetivo é identificar as capacidades funcionais oferecidas pelo software,
 baseando-se no código-fonte e não apenas no README ou na documentação existente.
 
@@ -38,7 +54,7 @@ Para cada capacidade identificada, informe:
 - Descrição
 - Funcionalidade implementada
 - Principais operações disponíveis
-- Arquivos do código que sustentam essa conclusão
+- Arquivos do código que sustentam essa conclusão (somente arquivos que você leu)
 
 Não invente capacidades que não possam ser comprovadas pelo código. Confira
 contagens (ex.: número de tools) e requisitos (ex.: versão do Python) no código.
@@ -50,5 +66,9 @@ Escreva o resultado em Markdown, servido pelo GitHub Pages:
   `https://github.com/<owner>/<repo>` e a branch analisada logo abaixo.
 - `docs/index.md` com o título `Capabilities Catalog`, e uma lista com link para
   cada página e o link do repositório de origem.
+
+Cada página de repositório deve terminar com duas seções: "Arquivos analisados"
+(lista dos arquivos que você de fato leu) e "Divergências com a documentação"
+(onde README/docs não batem com o código, ou "nenhuma").
 
 Abra um pull request com essas alterações.
