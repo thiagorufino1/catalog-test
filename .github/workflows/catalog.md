@@ -54,30 +54,65 @@ resultado.
 8. Se você não abriu o arquivo, você não pode afirmar nada sobre ele. Não deduza
    comportamento pelo nome de uma função.
 
-Seu objetivo é identificar as capacidades funcionais oferecidas pelo software,
-baseando-se no código-fonte e não apenas no README ou na documentação existente.
+## Regras de veracidade
 
-Para cada capacidade identificada, informe:
+- O catálogo deve refletir **exatamente** o código. Não invente nada: nenhuma
+  tool, operação, permissão, parâmetro, número ou versão que você não tenha visto
+  no código.
+- **Não confie no README nem em `docs/`**: podem estar desatualizados ou errados.
+  Use-os, no máximo, para encontrar divergências. Em caso de conflito, o código
+  vence.
+- Confira contagens (ex.: número de tools) e requisitos (ex.: versão do Python)
+  no código.
+- Se algo não pôde ser verificado, escreva "não verificado" em vez de supor.
 
-- Nome da capacidade
-- Descrição
-- Funcionalidade implementada
-- Principais operações disponíveis
-- Arquivos do código que sustentam essa conclusão (somente arquivos que você leu)
+## Saída
 
-Não invente capacidades que não possam ser comprovadas pelo código. Confira
-contagens (ex.: número de tools) e requisitos (ex.: versão do Python) no código.
+Escreva em português (pt-BR), em Markdown, servido pelo GitHub Pages. Mantenha
+nomes técnicos (tools, arquivos, permissões) exatamente como no código.
 
-Escreva o resultado em Markdown, servido pelo GitHub Pages:
+Todas as páginas começam com uma linha de navegação que funciona como abas,
+com a mesma lista em todas, na mesma ordem: `Summary` primeiro e depois um link
+por repositório, ex.: `[Summary](index.md) | [mcp-a](mcp-a.md) | [mcp-b](mcp-b.md)`.
 
-- Uma página por repositório em `docs/<nome-do-repo>.md`, com front matter
-  `title: Capabilities Catalog — <nome-do-repo>`, um H1 com o nome, o link
-  `https://github.com/<owner>/<repo>` e a branch analisada logo abaixo.
-- `docs/index.md` com o título `Capabilities Catalog`, e uma lista com link para
-  cada página e o link do repositório de origem.
+### `docs/index.md` (aba Summary)
 
-Cada página de repositório deve terminar com duas seções: "Arquivos analisados"
-(lista dos arquivos que você de fato leu) e "Divergências com a documentação"
-(onde README/docs não batem com o código, ou "nenhuma").
+Front matter `title: Capabilities Catalog`, a linha de navegação, o H1
+`Capabilities Catalog` e uma breve frase dizendo quantos repositórios foram
+analisados. Em seguida, **uma seção por repositório, todas com exatamente o mesmo
+formato**:
+
+- H2 com o nome do repositório (link para a página dele) e, abaixo, o link do
+  GitHub (`https://github.com/<owner>/<repo>`) e a branch.
+- **Descrição**: 1 a 3 frases.
+- **Principais capacidades**: lista curta, uma linha por domínio.
+- **Tecnologias**: linguagem/versão e dependências principais.
+- **Ferramentas**: o total, e **uma tabela com todas as tools** (colunas
+  `Tool | Descrição`, uma linha por tool, na ordem do código).
+
+Não inclua seções de informações técnicas comuns nem de metodologia.
+
+### `docs/<nome-do-repo>.md` (uma aba por repositório)
+
+Front matter `title: Capabilities Catalog — <nome-do-repo>`, a linha de
+navegação, H1 com o nome, link do GitHub e branch. Depois, nesta ordem:
+
+1. **Visão geral**: o que o software faz, em um parágrafo, com o total de
+   tools/capacidades.
+2. **Uma seção numerada por domínio funcional** (ex.: "1. Gestão de Usuários").
+   Em cada uma: descrição; funcionalidade; **tabela de operações**
+   (`Operação | Descrição | Implementação`, uma linha por tool, com o nome exato
+   e como é implementada, ex.: endpoint ou permissão usados); características
+   relevantes (limites, paginação, parâmetros, aprovações); e **Arquivos de
+   suporte** (os arquivos de código daquele domínio que você leu).
+3. **Arquitetura**: servidor e transporte, configuração, segurança, utilitários,
+   logging e integração com APIs externas, cada um com o arquivo correspondente.
+4. **Formatos de saída**, se o código define mais de um.
+5. **Dependências e requisitos**: versão da linguagem, dependências e
+   **permissões exigidas** (as que estão no código/configuração).
+6. **Resumo**: totais conferidos (tools, domínios).
+7. **Arquivos analisados**: somente os arquivos que você de fato abriu.
+8. **Divergências com a documentação**: onde README/docs não batem com o código,
+   ou "nenhuma".
 
 Abra um pull request com essas alterações.
