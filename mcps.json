@@ -1,5 +1,12 @@
 {
   "repositories": [
-    { "repo": "thiagorufino1/mcp-msteams", "branch": "main" }
+    {
+      "repo": "thiagorufino1/mcp-msteams",
+      "branch": "main"
+    },
+    {
+      "repo": "thiagorufino1/mcp-intune",
+      "branch": "main"
+    }
   ]
 }
