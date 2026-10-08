@@ -214,17 +214,19 @@ The MCP server is built using FastMCP framework with the following characteristi
 
 Handles Microsoft Graph API authentication and configuration:
 
-- Azure AD tenant ID, client ID, and client secret
-- Scopes: User.Read.All, Group.Read.All, Presence.Read.All, TeamsUserConfiguration.Read.All, CallRecords.Read.All, ServiceHealth.Read.All
-- Support for .env file configuration
+- Azure AD tenant ID, client ID, and client secret (`pydantic-settings`, `.env` supported)
+- Transport/host/port (`FASTMCP_TRANSPORT`, default `http`), log level/format
+- Per-domain cache TTLs (presence, user, teams, policies, calls, incidents, devices) and Graph concurrency/pagination limits
+- Graph permissions are **not** requested in code: the client credentials flow uses the `.default` scope, so effective permissions are those granted in the Azure App Registration (see `security/permissions.py`)
 
 ### Security Features
 
 **Directory**: `src/mcp_msteams/security/`
 
-- Input validation and sanitization
-- Authentication token management
-- Secure credential handling
+- `auth.py`: token acquisition (MSAL client credentials)
+- `input_validation.py` and `utils/sanitization.py`: input validation and sanitization
+- `permissions.py`: scope mapping per feature domain (all resolve to `.default`)
+- All tools are read-only (only `Read` Graph permissions)
 
 ### Utilities
 
@@ -238,7 +240,7 @@ Handles Microsoft Graph API authentication and configuration:
 
 **File**: `src/mcp_msteams/logging_config.py` (2,648 bytes)
 
-- Structured logging with audit trail
+- Structured logging (structlog) with audit trail
 - Operation tracking with `@audited` decorator
 - Configurable log levels
 
@@ -246,7 +248,7 @@ Handles Microsoft Graph API authentication and configuration:
 
 **Directory**: `src/mcp_msteams/graph/`
 
-- HTTP client management
+- HTTP client (`client.py`), response cache (`cache.py`), endpoint definitions (`endpoints.py`) and Graph error mapping (`errors.py`)
 - Graph API endpoint handling
 - Request/response processing
 
@@ -265,8 +267,9 @@ The server supports two response formats for all operations:
 
 Based on code analysis, the system requires:
 
-- **Python**: Modern async/await support (Python 3.8+)
-- **FastMCP**: MCP server framework
+- **Python**: 3.11+ (`requires-python = ">=3.11"`)
+- **FastMCP** (`fastmcp>=2.0`): MCP server framework
+- **msal** (client credentials flow), **httpx**, **pydantic / pydantic-settings**, **tenacity** (retries), **structlog**
 - **Microsoft Graph API**: Access to organizational data
 - **Azure AD Application**: With appropriate permissions configured
 
@@ -279,8 +282,10 @@ Based on code analysis, the system requires:
 - `CallRecords.Read.All` - Call quality data
 - `ServiceHealth.Read.All` - Service incidents
 
+Additional permissions referenced in `security/permissions.py` comments: `Team.ReadBasic.All`, `TeamMember.Read.All`, `Directory.Read.All`, `Channel.ReadBasic.All`, `ChannelSettings.Read.All`, `ChannelMessage.Read.All`, `Reports.Read.All`, `OnlineMeetings.Read.All`.
+
 ---
 
 ## Summary
 
-The Microsoft Teams MCP Server provides **23 distinct operations** across **6 capability areas**, enabling comprehensive Teams administration, monitoring, and support through a unified MCP interface. All capabilities are backed by production-quality service implementations ranging from 4KB to 26KB, with proper error handling, parameter validation, and response formatting.
+The Microsoft Teams MCP Server provides **27 distinct operations** across **6 capability areas**, enabling comprehensive Teams administration, monitoring, and support through a unified MCP interface. All capabilities are backed by production-quality service implementations ranging from 4KB to 26KB, with proper error handling, parameter validation, and response formatting.
