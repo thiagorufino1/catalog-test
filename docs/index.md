@@ -1,12 +1,14 @@
 ---
-title: Capabilities Catalog
+title: Capabilities Catalog — mcp-msteams
 ---
 
-# Capabilities Catalog
+# Capabilities Catalog — mcp-msteams
+
+**Repositório avaliado:** [thiagorufino1/mcp-msteams](https://github.com/thiagorufino1/mcp-msteams) (branch `main`)
 
 ## Overview
 
-This document catalogs the functional capabilities of the Microsoft Teams MCP (Model Context Protocol) Server, based on source code analysis of the `thiagorufino1/mcp-msteams` repository.
+This document catalogs the functional capabilities of the Microsoft Teams MCP (Model Context Protocol) Server, based on source code analysis of the [`thiagorufino1/mcp-msteams`](https://github.com/thiagorufino1/mcp-msteams) repository.
 
 The MCP server provides a comprehensive set of tools for managing and monitoring Microsoft Teams through the Microsoft Graph API, organized into six main capability areas.
 

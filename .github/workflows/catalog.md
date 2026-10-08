@@ -39,5 +39,6 @@ Para cada capacidade identificada, informe:
 Não invente capacidades que não possam ser comprovadas pelo código.
 
 Escreva o resultado em Markdown no arquivo `docs/index.md` (página servida
-pelo GitHub Pages, com front matter `title: Capabilities Catalog`) e abra um
+pelo GitHub Pages, com front matter `title: Capabilities Catalog — <nome do repo>`) O topo da página deve ter um H1 com o nome do repositório avaliado e, logo abaixo,
+o link para ele (`https://github.com/<owner>/<repo>`) e a branch analisada. Abra um
 pull request com essa alteração.
