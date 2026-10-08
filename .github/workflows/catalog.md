@@ -40,9 +40,18 @@ resultado.
    arquivos de serviços/lógica de negócio, clientes de API, autenticação e
    segurança. Entenda o que o código realmente faz (chamadas externas feitas,
    permissões exigidas, filtros, paginação, cache, erros tratados).
-5. Só use README e `docs/` para comparar, nunca como fonte. Se o README divergir
+5. **Abra todos os arquivos que registram capacidades** (todos os módulos de
+   tools/rotas/comandos), um por um. Não basta listar a pasta nem ler só alguns
+   arquivos: se um módulo não foi aberto, suas capacidades não podem entrar no
+   catálogo nem ser deduzidas pelo nome do arquivo.
+6. **Inventário e conferência:** monte a lista completa dos nomes registrados no
+   código (ex.: cada `name="..."` de tool). Cada nome deve aparecer no catálogo,
+   exatamente como no código, e nenhum nome pode aparecer se não estiver no
+   código. Informe no topo de cada página o total de tools/capacidades
+   encontradas e confira que a contagem da página bate com o inventário.
+7. Só use README e `docs/` para comparar, nunca como fonte. Se o README divergir
    do código, o código vence: registre a divergência na seção "Divergências".
-6. Se você não abriu o arquivo, você não pode afirmar nada sobre ele. Não deduza
+8. Se você não abriu o arquivo, você não pode afirmar nada sobre ele. Não deduza
    comportamento pelo nome de uma função.
 
 Seu objetivo é identificar as capacidades funcionais oferecidas pelo software,
