@@ -5,15 +5,20 @@ on:
   workflow_dispatch:
 
 engine:
-  id: copilot
-  model: gpt-5.4-mini
+  id: claude
+  model: claude-sonnet-4-5
 
 permissions:
   contents: read
 
 tools:
   github:
-    toolsets: [default]
+    toolsets: [repos]
+
+safe-outputs:
+  create-pull-request:
+    title-prefix: "[catalog] "
+    draft: false
 ---
 
 # Capabilities Catalog
@@ -33,4 +38,6 @@ Para cada capacidade identificada, informe:
 
 Não invente capacidades que não possam ser comprovadas pelo código.
 
-Produza o resultado em Markdown.
+Escreva o resultado em Markdown no arquivo `docs/index.md` (página servida
+pelo GitHub Pages, com front matter `title: Capabilities Catalog`) e abra um
+pull request com essa alteração.
